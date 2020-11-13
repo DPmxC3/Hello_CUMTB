@@ -2,11 +2,11 @@
 
 ## 目录
 
-+ [前言]https://github.com/Alexiosvon/Hello_CUMTB#%E5%89%8D%E8%A8%80
++ [前言](https://github.com/Alexiosvon/Hello_CUMTB#%E5%89%8D%E8%A8%80)
 
 ### 前言
 
-本项目想法来源于 [浙江大学课程攻略计划]https://github.com/QSCTech/zju-icicles ，旨在收录中国矿业大学（北京）计算机系的相关资料，为同学们提供一个更好的资料分享平台和获取渠道
+本项目想法来源于 [浙江大学课程攻略计划](https://github.com/QSCTech/zju-icicles) ，旨在收录中国矿业大学（北京）计算机系的相关资料，为同学们提供一个更好的资料分享平台和获取渠道
 
 > 来到一所大学，从第一次接触许多课，直到一门一门完成，这个过程中我们时常收集起许多资料和情报。
 >
