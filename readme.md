@@ -1,7 +1,10 @@
 # Hello CUMTB
 
 ## 目录
-[toc]
+- [Hello CUMTB](#hello-cumtb)
+  * [前言](#--)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## 前言
 
