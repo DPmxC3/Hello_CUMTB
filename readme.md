@@ -1,8 +1,7 @@
 # Hello CUMTB
 
 ## 目录
-
-1. ### [前言](https://github.com/Alexiosvon/Hello_CUMTB#%E5%89%8D%E8%A8%80)
+[TOC]
 
 ## 前言
 
