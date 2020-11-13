@@ -1,7 +1,7 @@
 # Hello CUMTB
 
 ## 目录
-[TOC]
+[toc]
 
 ## 前言
 
