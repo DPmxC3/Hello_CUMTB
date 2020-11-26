@@ -6,7 +6,7 @@
 [![](https://img.shields.io/github/issues-pr-closed-raw/Alexiosvon/Hello_CUMTB.svg?style=flat)](https://github.com/Alexiosvon/Hello_CUMTB/issues)
 ![](https://img.shields.io/github/repo-size/Alexiosvon/Hello_CUMTB.svg?style=flat)
 
-由于本仓库未启用`git-lfs`，因此请不要上传单个超过100M的文件，否则commit无效。
+由于本仓库未启用`git-lfs`，因此请不要上传单个超过100M的文件（Web端应不超过25MB），否则commit无效。
 
 若要下载单个文件夹，复制该文件夹的网址，粘贴入[DownGit](https://minhaskamal.github.io/DownGit/#/home)中，选择download即可。
 
