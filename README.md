@@ -42,7 +42,7 @@
 >
 >我希望只要是前人走过的弯路，后人就不必再走。这是我的信念，也是我建立这个项目的原因。
 
-#### 选择GitHub的原因
+**选择GitHub的原因**
 
   QQ 群大多为年级和专业所分隔，无法长期共同地保有；况且群文件也缺乏组织。
   
@@ -76,7 +76,7 @@
 
 如果你有需要的资源在本项目中不存在，那么你可以在Issues中提出请求。维护者会尽量去搜集资料对Issue的请求进行跟进反馈，您的反馈会帮助项目变得更好。
 
-#### 具体步骤如下：
+**具体步骤如下：**
 
 1. 点击就在Code右边的Issues，点击New Issue新建一个Issue
 
@@ -97,7 +97,7 @@ Issue、PR、纠错、资料、考试攻略，完全欢迎！
 
 若想为此仓库提交资料，请克隆本仓库后提PR(Pull Request)。
 
-#### 具体步骤如下（在Web端进行）：
+**具体步骤如下（在Web端进行）：**
 
 1. Fork 本项目 
 
@@ -105,7 +105,7 @@ Issue、PR、纠错、资料、考试攻略，完全欢迎！
 
 3. 发起 PR 
 
-#### 命令行操作 [Git操作](https://github.com/Alexiosvon/Hello_CUMTB/tree/master/%E5%85%B6%E4%BB%96%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/Git)
+**命令行操作 [Git操作](https://github.com/Alexiosvon/Hello_CUMTB/tree/master/%E5%85%B6%E4%BB%96%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/Git)
 
 &nbsp;
 
