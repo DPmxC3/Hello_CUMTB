@@ -1,117 +1,393 @@
-# Hello CUMTB
+A:题目意思很明确了，前k-1次是不成功，最后一次是成功。
 
-[![](https://img.shields.io/github/watchers/Alexiosvon/Hello_CUMTB.svg?style=flat)](https://github.com/Alexiosvon/Hello_CUMTB/watchers)
-[![](https://img.shields.io/github/stars/Alexiosvon/Hello_CUMTB.svg?style=flat)](https://github.com/Alexiosvon/Hello_CUMTB/stargazers)
-[![](https://img.shields.io/github/forks/Alexiosvon/Hello_CUMTB.svg?style=flat)](https://github.com/Alexiosvon/Hello_CUMTB/network/members)
-[![](https://img.shields.io/github/issues-pr-closed-raw/Alexiosvon/Hello_CUMTB.svg?style=flat)](https://github.com/Alexiosvon/Hello_CUMTB/issues)
-![](https://img.shields.io/github/repo-size/Alexiosvon/Hello_CUMTB.svg?style=flat)
+```C++
+#include <iostream>
+#include <cmath>
+using namespace std;
+int t, k;
+double x;
+int main(void) {
+    cin >> t;
+    while (t--) {
+        cin >> x >> k;
+        printf("%.6lf\n", pow(1 - x, k - 1) * x );
+    }   
+}
+```
 
-由于本仓库未启用`git-lfs`，因此请不要上传单个超过100M的文件（Web端应不超过25MB），否则commit无效。
 
-若要下载单个文件夹，复制该文件夹的网址，粘贴入[DownGit](https://minhaskamal.github.io/DownGit/#/home)中，选择download即可。
 
-如果觉得本仓库有用，欢迎**给个Star**😼来自大家的关注、维护和贡献，才是让这个资料集继续存在的核心动力☺️
+B:让第k个数尽可能大，那就先对a，b数组排好序，然后我们要让第k大的数尽可能大的话。就直接取a，b数组后面的k~n的数。然后让a数组较大的一端和b数组较小的一端相加。然后取最小值就是我们要找的尽可能大的第k大的数
 
-&nbsp;
+```c++
+#include <iostream>
+#include <algorithm>
+using namespace std;
+#define maxn 1000000
+int N, K;
+int a[maxn], b[maxn];
+int ans = 0x7fffffff;
+int main(void) {
+    cin >> N >> K;
+    for (int i = 1; i <= N; i++) cin >> a[i];
+    for (int i = 1; i <= N; i++) cin >> b[i];
+    sort(a + 1, a + N + 1);
+    sort(b + 1, b + N + 1);
+    int j = 1;
+    for (int i = N - K + 1; i <= N; i++) {
+        ans = min(ans, a[i] + b[N - j + 1]);
+        j++;
+    }
+    cout << ans << endl;
+    return 0;
+} 
+```
 
-## 目录
 
-- [前言](#前言)
 
-- [内容](#内容)
+C:我出的== ，其实好好想想，我们只是取前32位。要得到一个数。我们任意一个32位的数都可以找到对应的值。从0 ~ 2147483647。从 -2147483648 ~ -1所以每个32位的数都是4294967296种。
 
-- [资源请求](#资源请求)
+```c++
+#include <iostream>
+using namespace std;
+int main(void) {
+    int n;
+    cin >> n;
+    cout << "4294967296" << endl;
+    return 0;
+}
+```
 
-- [贡献](#贡献)
 
-&nbsp;
 
-## 前言
+D: 神仙题目，这边建议跳过，膜拜下大佬代码==
 
-本项目想法来源于 [`浙江大学课程攻略计划`](https://github.com/QSCTech/zju-icicles) ，旨在收录中国矿业大学（北京）所有系的相关资料，为同学们提供一个更好的资料分享平台和获取渠道
+```C++
+#include <bits/stdc++.h>
+using namespace std;
+ 
+const int MAXN = 2e2 + 5;
+ 
+int l, la, ansl, nob, tot, mx, f[MAXN];
+char a[MAXN], b[MAXN], ans[MAXN];
+ 
+int main() {
+    cin >> l >> a + 1, la = strlen(a + 1);
+    for (int i = la; i >= l; i--)
+        for (int j = 1; j <= la - i + 1; j++) {
+            tot = 0;
+            memset(b, 0, sizeof(b));
+            for (int k = j; k <= j + i - 1; k++)
+                b[k - j + 1] = a[k];
+            memset(f, 0, sizeof(f));
+            f[0] = -1;
+            for (int k = 1, x = -1; k <= i; k++) {
+                while (x >= 0 && b[x + 1] != b[k]) x = f[x];
+                f[k] = ++x;
+            }
+            for (int k = 1, x = 0; k <= la; k++) {
+                while (x >= 0 && b[x + 1] != a[k]) x = f[x];
+                tot += (++x == i);
+            }
+            if (tot > mx) {
+                mx = tot;
+                for (int k = 1; k <= i; k++)
+                    ans[k] = b[k];
+                ansl = i; 
+            }
+        }
+    for (int i = 1; i <= ansl; i++)
+        cout << ans[i];
+    return 0;
+} 
+```
 
-> 来到一所大学，从第一次接触许多课，直到一门一门完成，这个过程中我们时常收集起许多资料和情报。
->
->有些是需要在网上搜索的电子书，每次见到一门新课程，Google 一下教材名称，有的可以立即找到，有的却是要花费许多眼力；有些是历年试卷或者 A4 纸，前人精心收集制作，抱着能对他人有用的想法公开，却需要在各个群或者 CC98 中摸索以至于从学长手中代代相传；有些是上完一门课才恍然领悟的技巧，原来这门课重点如此，当初本可以更轻松地完成得更好……
->
->我也曾很努力地收集各种课程资料，但到最后，某些重要信息的得到却往往依然是纯属偶然。这种状态时常令我感到后怕与不安。我也曾在课程结束后终于有了些许方法与总结，但这些想法无处诉说，最终只能把花费时间与精力才换来的经验耗散在了漫漫的遗忘之中。
->
->我为这一年一年，这么多人孤军奋战的重复劳动感到不平。
->
->我希望能够将这些隐晦的、不确定的、口口相传的资料和经验，变为公开的、易于获取的和大家能够共同完善、积累的共享资料。
->
->我希望只要是前人走过的弯路，后人就不必再走。这是我的信念，也是我建立这个项目的原因。
 
-**选择GitHub的原因**
 
-  QQ 群大多为年级和专业所分隔，无法长期共同地保有；况且群文件也缺乏组织。
-  
-  GitHub 项目可以使用目录进行文件组织，并且每个目录均可以在显示文件列表的同时显示一个 README，十分适合本项目的需求。
-  
-  GitHub 相对于某盘下载速度更快，让同学们体验更佳
-  
-  GitHub 带有便捷的 Issue 和 Pull Request 协作功能，并且可以方便地对贡献的质量进行监督和调整。
-  
-&nbsp;
+E: 跟着思路打就对了，当逐个找质数，然后相乘取模，到n个数就退出输出答案就行。
 
-## 内容
+```C++
+#include <iostream>
+#include <cmath>
+using namespace std;
+int n, c;
+long long ans = 1;
+ 
+bool is_true(int x) {
+    bool flag = false;
+    for (int i = 2; i <= sqrt(x); i++) {
+        if (x % i == 0) {
+            flag = true; break;
+        }
+    }
+    if (flag) return false;
+    else return true;
+}
+ 
+void init() {
+    for (int i = 2; ; i++) {
+        if(is_true(i)) {
+            c++;
+            ans = (ans * i) % 50000;
+            if (c == n) break;
+        }
+    }
+}
+ 
+int main(void) {
+    cin >> n;
+    init();
+    cout << ans << endl;
+    return 0;
+}
+```
 
-本项目目前已经收录了以下内容：
 
-- 课程相关的学习资料
 
-- 期末考试真题以及其他相关资料
+F:刚开始可以发现偶数是n个，奇数是n-1个，如果伊井野擦掉的是奇数的话，那就是n个偶数，n - 2个偶数。辉夜大小姐是以最优策略来擦的，所以最后一定是两个偶数，辉夜必胜!!!!
 
-- 专业课考研资料
+```c++
+#include <iostream>
+using namespace std;
+long long n;
+int main(void) {
+    cin >> n;
+    cout << n - 1 << endl;
+    return 0;
+}
+```
 
-- 除课程外其他学习资料
 
-**切换分支有惊喜：**
-  
-  点master（branches左侧），按下拉菜单即可选择您想看的分支
 
-&nbsp;
+G:适中的一道搜索题，看看应该能明白==
 
-## 资源请求
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+#define maxn 1000000
+int n, m, a[maxn], ans;
+vector<int> G[maxn];
+int dfs(int now, int fa, int count) {
+    if (G[now].size() == 1 && G[now][0] == fa) return 1;
+    for (int i = 0; i < G[now].size(); i++) {
+        if (G[now][i] == fa) continue;
+        if (a[G[now][i]]) {
+            if (count + 1 > m) continue;
+            else ans += dfs(G[now][i], now, count + 1);
+        }
+        else ans += dfs(G[now][i], now, 0);
+    }
+}
+int main(void) {
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++) cin >> a[i];
+    for (int i = 1; i <= n - 1; i++) {
+        int a, b; cin >> a >> b;
+        G[a].push_back(b); G[b].push_back(a);
+    }
+    dfs(1, 0, a[1] == 1 ? 1 : 0);
+    cout << ans << endl;
+    return 0;
+}
+```
 
-如果你有需要的资源在本项目中不存在，那么你可以在Issues中提出请求。维护者会尽量去搜集资料对Issue的请求进行跟进反馈，您的反馈会帮助项目变得更好。
 
-**具体步骤如下：**
 
-1. 点击就在Code右边的Issues，点击New Issue新建一个Issue
+H:利用前缀和思想,得出每个温度的推荐食谱本数,进而得出每个温度是否是推荐温度,再次通过前缀和回答问题
 
-2. 按要求填写标题，正文
+```c++
+#include <cstdio>
+#include <algorithm>
+#include <cstring>
+#include <map>
+#include <string>
+#include <iostream>
+using namespace std;
+typedef long long ll;
+const int N = 2e5 + 50;
+int d[N],a[N];
+int t[N], n,k,q;
+int lowbit(int x){ return x & -x;}
+void add(int x, int v) {
+    while(x <= n) {
+        t[x] += v;
+        x += lowbit(x);
+    }
+}
+int sum(int x) {
+    int ans = 0;
+    while(x) {
+        ans += t[x];
+        x -= lowbit(x);
+    }
+    return ans;
+}
+void pre() {
+}
+ 
+void solve(int _case) {
+    scanf("%d %d %d", &n, &k, &q);
+    int rmax = 0;
+    for(int i = 1; i <= n; i++) {
+        int l,r;
+        scanf("%d %d", &l, &r);
+        d[l]++;
+        d[r+1]--;
+        rmax = max(rmax, r);
+    }
+    n = rmax + 5;
+    for(int i = 1; i <= n; i++) a[i] += a[i-1] + d[i];
+    for(int i = 1; i <= n; i++) if(a[i] >= k) add(i,1);
+    for(int i = 1; i <= q; i++) {
+        int a,b;
+        scanf("%d %d", &a, &b);
+        b = min(b,n);
+        a = min(a,n);
+        int ans = sum(b) - sum(a-1);
+        printf("%d\n", ans);
+    }
+}
+int main() {
+    pre();
+    int T;
+    T = 1;
+    for(int i = 1; i <= T; i++) {
+        solve(i);
+    }
+    return 0;
+}
+```
 
-3. 可选择Labels添加标签
 
-4. 都完成后，单击Submit new issue提交
 
-&nbsp;
 
-## 贡献
 
-Issue、PR、纠错、资料、考试攻略，完全欢迎！
-大家对本项目的支持和贡献，正是本项目继续存在并前进的动力
+I:枚举两张卡片,若某个属性相同则第三张相同,不同则第三张也不同,就确定下了第三张卡片,但是这样枚举会重复计算,所以要去重
 
-如果要上传Word、PPT文件，最好将其转为PDF
+```c++
+#include <cstdio>
+#include <algorithm>
+#include <cstring>
+#include <map>
+#include <string>
+#include <iostream>
+using namespace std;
+typedef long long ll;
+const int N = 2e4 + 50;
+void pre() {
+}
+string s[N];
+void solve(int _case) {
+    int n,k;
+    map<string, int> mp;
+    cin >> n >> k;
+    for(int i = 1; i <= n; i++) {
+        cin >> s[i];
+        mp[s[i]]++;
+    }
+    int ans = 0;
+    for(auto pr : mp) {
+        if(pr.second >= 3) {
+            ans += 1LL*pr.second*(pr.second-1)*(pr.second-2)/6;
+        }
+    }
+    string tmp(k,' ');
+    for(int i = 1; i <= n; i++) {
+        int cnt = 0;
+        for(int j = i+1; j <= n; j++) {
+            if(s[i] == s[j]) continue;
+            for(int it = 0; it < k; it++) {
+                if(s[i][it] == s[j][it]) {
+                    tmp[it] = s[i][it];
+                }
+                else
+                    tmp[it] = 'Q'^'A'^'B'^s[i][it]^s[j][it];
+            }
+            cnt += mp[tmp];
+     
+        }
+        cnt /= 2;
+        ans += cnt;
+        mp[s[i]]--;
+    }
+    printf("%d\n", ans);
+}
+int main() {
+    // freopen("data.in","r",stdin);
+    pre();
+    int T;
+    // scanf("%d", &T);
+    T = 1;
+    for(int i = 1; i <= T; i++) {
+        solve(i);
+    }
+    return 0;
+}
+```
 
-若想为此仓库提交资料，请克隆本仓库后提PR(Pull Request)。
 
-**具体步骤如下（在Web端进行）：**
 
-1. Fork 本项目 
 
-2. 在你Fork后的项目中，如果要上传到已有文件夹，直接打开对应的文件夹，把需要上传的文件拖动到浏览器里，等待上传结束后，填写提交信息并Commit;若上传文件到不存在的文件夹，点击绿色Download按钮旁的upload，把浏览器地址栏中文件夹名称改为你想要新建的文件夹名称，然后回车，上传你的文件。 
 
-3. 发起 PR 
+J:找规律可以发现和斐波那契数列有关
 
-**命令行操作** [Git操作](https://github.com/Alexiosvon/Hello_CUMTB/tree/master/%E5%85%B6%E4%BB%96%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/Git)
+```c++
+#include<cstdio>
+#include<iostream>
+using namespace std;
+#define R register
+int N,T;
+long long fib[90];
+int main() {
+    scanf("%d", &T);
+    fib[0] = 0, fib[1] = 1, fib[2] = 2;
+    for(R int i = 3;i < 85; ++i) fib[i] = fib[i - 1] + fib[i - 2];
+    while(T--) {
+        scanf("%d", &N);
+        printf("%lld\n", fib[N] + fib[N + 1]);
+    }
+    return 0;
+}
+```
 
-&nbsp;
 
-## 免责声明
 
-本项目建立的初衷是为了方便同学们更好地学习, **严禁用于任何商业用途!**
+K:直接暴力O(N^2)划分就行
 
-如果您认为本仓库的一些文件侵犯了您的权益或者有侵权内容，请在issues下指出，非常感谢。 我将会从仓库中彻底清除它们。
+```C++
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+#define ld double
+ 
+char s[300];
+int len;
+ 
+inline bool pd(int x,int y){
+    string t="";
+    for(int i=1;i<=len;++i)
+        if(x<=i && i<=y) continue;
+        else t+=s[i];
+    if(t=="WELCOMETOACM") return 1;
+    else return 0;
+}
+ 
+int main()
+{
+    scanf("%s",s+1); len=strlen(s+1);
+    for(int i=1;i<=len;++i)
+        for(int j=i;j<=len;++j)
+            if(pd(i,j)) {printf("Yes!"); return 0;}
+    printf("No.");
+    return 0;
+}
+```
+
+
+
+
+
+
 
