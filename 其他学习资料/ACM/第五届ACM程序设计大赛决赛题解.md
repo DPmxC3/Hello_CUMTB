@@ -131,7 +131,41 @@ int main()
 
 E: 
 
-F: 
+F: 奇数行只能走右边，偶数行只能走左边。模拟一下就可以出来
+```
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll ans,n,m;
+bool f=true;
+string str;
+int main() {
+	cin>>n>>m;
+	int prex=0,prey=0;
+	for(int i=0; i<n; i++) {
+		cin>>str;
+		if(f) {
+			for(int j=0; j<m; j++) {
+				if(str[j]=='W') {
+					ans+=abs(i-prex)+abs(j-prey);
+					prex=i,prey=j;
+				}
+
+			}
+		} else {
+			for(int j=m-1; j>=0; j--) {
+				if(str[j]=='W') {
+					ans+=abs(i-prex)+abs(j-prey);
+					prex=i,prey=j;
+				}
+
+			}
+		}
+		f = !f;
+	}
+	cout<<ans<<endl;
+}
+```
 
 G：分析：因为是要从(1,1)传到(n,m)再从(n,m)传回(1,1),所以可以考虑做两次dp,不过这样比较麻烦，考虑到本题数据较小，可以认为从(1,1)传了2张纸条，而这两张纸条传递的路线不交叉.用dp[i][j][p][q]表示两张纸条分别在(i.j),(p,q)时的好感最大值，显然dp[i][j][p][q] = max(max(dp[i-1][j][p-1][q],dp[i-1][j][p][q-1]),max(dp[i][j-1][p-1][q],dp[i][j-1][p][q-1])) + map[i][j] + map[p][q];如果是这样计算，两张纸条很有可能交叉重叠，这个时候，我们只需要让一个纸条传到交叉的地方即可，即dp[i][j][p][q] -= map[i][j].
 ```
