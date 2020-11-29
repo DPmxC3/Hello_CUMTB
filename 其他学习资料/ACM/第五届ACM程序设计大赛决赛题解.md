@@ -138,57 +138,41 @@ int main()
 
 E：统计一下横坐标，纵坐标，看一下关系就出来了~~
 ```
-#include <bits/stdc++.h>
+#include<cstdio>
+#include<iostream>
 using namespace std;
-
-const int N = 31;
-const int MAXN = N + 5;
-
-int t, f[MAXN], y[MAXN], d[MAXN], ftot, ytot;
-char a[MAXN][MAXN];
-
-int getd(int o) {
-	return y[o] > y[o - 1] ? 1 : y[o] == y[o - 1] ? 2 : 3;
-}
-char fn[MAXN];
+#define R register
+int T;
+int cnt[35][35];
  
-int main() {
-
-		cin >> t, cin.get();
-		for (int k = 1; k <= t; k++) {
-			bool g = 0;
-			ftot = ytot = 0;
-			memset(f, 0, sizeof(f)), memset(y, 0, sizeof(y));
-			memset(d, 0, sizeof(d));
-			for (int i = 1; i <= N; i++)
-				cin.getline(a[i], N + 1);
-			for (int i = 1; i <= N; i++) {
-				for (int j = 1; j <= N; j++)
-					if (a[j][i] == '*')
-						f[i]++, y[++ytot] = j;
-				if (f[i]) ftot++;	
-			}
-			if (ftot == 1) {
-				cout << "Linear!" << endl;
-				continue;
-			}
-			for (int i = 1; i <= N; i++)
-				if (f[i] > 1) {
-					cout << "Rectangle!" << endl;
-					g = 1;
-					break;
-				}
-
-			
-			if (g) continue;
-			for (int i = 2; i <= ytot; i++)
-				d[getd(i)]++;
-			if (d[1] && d[3]) cout << "Quadratic!" << endl;
-			else cout << "Linear!" << endl;
-	}
-	
-	return 0;	
-} 
+int main()
+{     
+    scanf("%d",&T);
+    while(T--){
+        for(R int i=1;i<=31;++i) cnt[i][0]=0;
+        for(R int i=1;i<=31;++i){
+            getchar();
+            for(R int j=1;j<=31;++j){
+                R char x=getchar();
+                if(x=='*') cnt[i][++cnt[i][0]]=j;
+            }
+             
+        }
+        R bool flag=0; R int k=0;
+        for(R int i=1;i<=31;++i)
+            if(cnt[i][0]>=2) {flag=1; k=i; break;}
+        if(!flag) {printf("Linear!\n"); continue;}
+        if(cnt[k][0]>2) {printf("Rectangle!\n"); continue;}
+        for(R int i=k+1;i<=31;++i){
+            if(cnt[i][0]==2) 
+                if(cnt[k][2]==cnt[i][2]) {flag=0; break;}
+             
+        }
+        if(!flag) printf("Rectangle!\n"); 
+        else printf("Quadratic!\n");
+    }
+    return 0;
+}
 ```
 &nbsp;
 &nbsp;
@@ -364,6 +348,7 @@ int main(void) {
 ```
 &nbsp;
 &nbsp;
+
 J: 由于有一边与x或y平行，所以只有1为底，2为高，1为高2为底这两种情况，，，然后你画一个简单的图，把他们表示出来，注意不要重复运算，然后为了取模，将它变为（ab）%c=（（a%c）（b%c））%c的格式，也就是因式分解，就完成了，详细一点为，比方说有一个mn的格点，x为m，y方向n个，我们以2为底，平行于x轴，那么在m个格点里我们共有m-2个2，（比如三个格点只有一个2），那么它所有的上面一行的m个点，都可以构成好三角形，有m个，最上面一行无法向上构成，因而又（n-1）行，又，可以从上往下画三角形，同理，也是n-1行，每行有m-2个2，每个2对应m个点。然后这种三角形我们平行y轴，将刚刚式子，m和n对调即可。对于底为1，高为2的情况，同理每行有m-1个1，每个1对应m-2个点（这里减去两个是为了把和平行y轴，底为2的重复的去掉），显然有n-2行，上下再2，m、n再对调，加起来即为总和，因式分解到能够取模的地步，完成。
 ```
 #include<bits/stdc++.h>
