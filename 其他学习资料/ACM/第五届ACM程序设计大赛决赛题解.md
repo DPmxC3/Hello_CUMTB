@@ -129,7 +129,60 @@ int main()
 ```
 
 
-E: 
+E: 统计一下横坐标，纵坐标，看一下关系就出来了~~
+```
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 31;
+const int MAXN = N + 5;
+
+int t, f[MAXN], y[MAXN], d[MAXN], ftot, ytot;
+char a[MAXN][MAXN];
+
+int getd(int o) {
+	return y[o] > y[o - 1] ? 1 : y[o] == y[o - 1] ? 2 : 3;
+}
+char fn[MAXN];
+ 
+int main() {
+
+		cin >> t, cin.get();
+		for (int k = 1; k <= t; k++) {
+			bool g = 0;
+			ftot = ytot = 0;
+			memset(f, 0, sizeof(f)), memset(y, 0, sizeof(y));
+			memset(d, 0, sizeof(d));
+			for (int i = 1; i <= N; i++)
+				cin.getline(a[i], N + 1);
+			for (int i = 1; i <= N; i++) {
+				for (int j = 1; j <= N; j++)
+					if (a[j][i] == '*')
+						f[i]++, y[++ytot] = j;
+				if (f[i]) ftot++;	
+			}
+			if (ftot == 1) {
+				cout << "Linear!" << endl;
+				continue;
+			}
+			for (int i = 1; i <= N; i++)
+				if (f[i] > 1) {
+					cout << "Rectangle!" << endl;
+					g = 1;
+					break;
+				}
+
+			
+			if (g) continue;
+			for (int i = 2; i <= ytot; i++)
+				d[getd(i)]++;
+			if (d[1] && d[3]) cout << "Quadratic!" << endl;
+			else cout << "Linear!" << endl;
+	}
+	
+	return 0;	
+} 
+```
 
 F: 奇数行只能走右边，偶数行只能走左边。模拟一下就可以出来
 ```
