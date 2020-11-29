@@ -50,6 +50,53 @@ int QAQ = dy();
 int main(){;}
 ```
 
+C: 题意：给一个N，K，首先对于所有1，k（1<=k<=K），都是符合要求的，然后所有的符合要求的数的数（n，k），若n+k<N，则(n+k，k)也是好的，若nk<N，则（nk，k）也是好的，求符合要求的数量。
+
+题解：首先可以先写一写，举个栗子，（1，3）。
+
+可以变为（4，3），（3，3）。
+
+现在应该很容易发现，乘法操作已经没用了，因为乘3必然是3的倍数，一定可以通过加3到达，所以可以写成两个不等式。
+
+1+m*k<=N，
+
+m*k<=N，
+
+m表示符合要求的个数，然后暴力枚举k，算出每个m既可，K过大枚举超时，但是我们可以发现k中间有很多的m都相等，呈线性关系，故可用整除分块优化。
+```
+#include<iostream>
+#define ll long long
+using namespace std;
+const ll mod=1e9+7;
+ll n,k,ans,m,to,now;
+int main(){
+	scanf("%lld%lld",&n,&k);
+	for(ll i=2;i<=k;i++){
+		now=i;
+		m=n/i;
+		if(m==0)break;
+		to=min(n/m,k);
+		i=to;
+		m%=mod;
+		to%=mod;
+		ans=(ans+m*(to-now+1))%mod;
+		//printf("%lld %lld %lld %lld\n",now,to,ans,i);
+	}
+	for(ll i=2;i<=k;i++){
+		now=i;
+		m=(n-1)/i;
+		if(m==0)break;
+		to=min((n-1)/m,k);
+		i=to;
+		m%=mod;
+		to%=mod;
+		ans=(ans+m*(to-now+1))%mod;
+		//printf("%lld %lld %lld i=%lld\n",now,to,ans,i);
+	}
+	printf("%lld\n",(ans+k+n-1)%mod);
+}
+```
+
 H: 如果做过NOIP2002均分纸牌的话,在看到这道题的时候应该很容易联想过去,然后打个假贪心,莫名其妙就A掉了,并且,这道题的小数据恰好是负载平衡问题的数据范围,也就是说,是负载平衡问题和均分纸牌的数据范围加强版,但是思路和做法是一样的数学证明: 最终的局面是每个小朋友的糖果数量相同,为平均数(ave)设编号为i的小朋友开始有Ai个糖果Xi表示第i个小朋友给了第i-1个小朋友Xi个糖果,Xi<0表示第i-1个小朋友给了第i个小朋友|Xi|个糖果则最终的答案ans=|X1|+|X2|+……+|Xn|对于第一个小朋友,他给了第n个小朋友X1个糖果,得到第2个小朋友的X2个糖果,最终还剩A1-X1+X2个糖果,即ave个糖果,所以得到方程A1-X1+X2=ave同理可得A2-X2+X3=ave......这几个方程综合一下:X2=ave-A1+X1=X1-C1 (C1=A1-ave)X3=2ave-A1-A2+X1+X2=X1-C2 (C2=A1+A2-X2-2ave)X4=3ave-A1-A2-A3+X1+X2+X3=X1-C3 (C3=A1+A2+A3-X2-X3-3ave)......ans=|X1|+|X1-C1|+|X1-C2|+......+|X1-Cn-1| |X1-Ci|的几何意义是数轴上点X1到Ci的距离问题就转化为: 给定数轴上n个点,找一个点使其到各点的距离和最小,而这个点就是中位数
 ```
 #include <cstdio>
