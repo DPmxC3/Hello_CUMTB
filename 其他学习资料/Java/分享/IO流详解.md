@@ -2,7 +2,7 @@
 
 我们就讲讲一些实用的IO流，总共包括15个可以分为字节流和字符流。详细如下图：
 
-![img](https://img-blog.csdn.net/20160730203130926?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![img](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201201232717)
 
 emmm 还有一个就是`PrintStream`就是我们每次输出的时候是`System.out.println`。这个`System.out`就是`PrintStream`类型啊。然后`PrintStream`重载了`println`这个方法。
 
