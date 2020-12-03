@@ -7,7 +7,6 @@
 
 - [The GitHub Blog](https://github.com/blog) github 官方博客，关注最新动态
 - [github help](https://help.github.com/) Sometimes you just need a little help. 中文翻译版在此[Github 帮助文档](https://github.com/waylau/github-help)
-- [github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet) 关于使用 git 和 github 的一些技巧汇总，中文版在此[GitHub秘籍](https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.zh-cn.md)
 - [蒋鑫-GotGitHub](http://www.worldhello.net/gotgithub/#gotgithub) 《Git权威指南》的作者，对Github的介绍博客
-- [github 之 fork 简介指南](https://linux.cn/article-4292-1.html) 帮你理解清楚什么是fork，fork 的工作流有哪些
+- [github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet) 关于使用 git 和 github 的一些技巧汇总，中文版在此[GitHub秘籍](https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.zh-cn.md)
 - [github 支持的 emoji表情](http://www.emoji-cheat-sheet.com/)
