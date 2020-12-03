@@ -107,7 +107,7 @@ Issue、PR、纠错、资料、考试攻略，完全欢迎！
 
 **命令行操作** [Git操作](https://github.com/Alexiosvon/Hello_CUMTB/tree/master/%E5%85%B6%E4%BB%96%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/Git)
 
-**想要高效使用GitHub可以戳这** :point_right: [GitHub使用指南](https://github.com/Alexiosvon/Hello_CUMTB/tree/master/%E5%85%B6%E4%BB%96%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/GitHub)
+**想要高效使用GitHub可以戳这** :point_right: [GitHub使用指南](https://github.com/Alexiosvon/Hello_CUMTB/blob/master/%E5%85%B6%E4%BB%96%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/GitHub/GitHub%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.md)
 
 &nbsp;
 
