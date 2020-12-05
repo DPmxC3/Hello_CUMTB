@@ -16,8 +16,8 @@
   
   - 自定义类加载器（Custom ClassLoader）：用户也可以定义自己的类加载器，实现一些定制的功能
   
-    ![img](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201125012441)
-
+ ![image-20201205161201900](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201205161204.png)
+ 
 关于类加载器有以下几点需要注意一下:
 
 1. 用户类加载器都实现了`java.lang.ClassLoader`抽象类，该类有一个叫做`private final ClassLoader parent`的父加载器。是用来保存父类加载器的。![image-20201124002130698](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201125012455.png)
@@ -314,13 +314,4 @@ public class loadclass {
 
   连接指定的一个类，如果你想在类被加载到JVM中的时候就被链接(Link)，则调用resolveClass()方法。通过源码发现，这是个用native方法实现。
 
-这里就是目前知道的类加载过程。
-
-
-
-
-
-
-
-
-
+这里就是最基本的类加载过程了。以后会慢慢更新`其他用户类加载器`的源码
