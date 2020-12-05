@@ -62,14 +62,49 @@ int main()
 ```shell
 unix> gcc -o hello hello.c
 ```
+每个实际的步骤是这样的,先例如我们的源文件这样的一个C语言,我们命名为`hello.c`：
+```
+#include <stdio.h>
+int main(void) {
+	printf ("Hello world\n");
+	return 0;
+}
+```
+这就算一个C语言文件了。然后分别执行下面几条指令就对应下面所说的不同阶段：
+```
+gcc -E hello.c -o hello.i # 将c文件通过预编译器编译成为.i文件。并存为hello.i
+gcc -S hello.i -o hello.s # 同理 将.i文件通过编译转换为汇编文件。并存为hello.s
+gcc -c hello.s -o hello.o # 统理 将.s汇编文件，通过汇编器编译为`可重定位目标程序`,并存为hello.o文件
+gcc hello.o -o hello # 将.o文件转换为可执行文件。
+./hello # 运行
+```
+最后的输出:
+```
+[root@localhost Cproject]# ./hello
+Hello world
+```
 
 这里，gcc编译器驱动程序读取源程序文件hello.c,并把它翻译成一个可执行目标文件hello(windows是exe文件)。这个要四个过程完成，这四个过程分别是(`预处理器`, `编译器`, `汇编器`, `链接器`) 一起构成编译系统
 
 ![image-20201126211230580](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201127002133.png)
 
 * 预处理阶段:  预处理器(cpp)根据以字符#开头的命令，修改原始C程序。比如hello.c中第一行的#include <stdio.h>指令告诉预处理器**读取系统头文件stdio.h的内容，并把它直接插入到程序文本中去。结果得到另一个C程序**，通常以.i文件为扩展名
+&nbsp;
+说简单点就是替换掉类似`#include <stdio.h>`的东西，然后删除你源程序的注释
+&nbsp;
+源程序：![image-20201205144408511](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201205144513.png)
+&nbsp;
+.i文件：![image-20201205144503044](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201205144734.png)
+由于GitHub图片总是出问题，前面的函数部分就不截图，总之就是含有extern的一个函数。但是并没有实现，然后等着链接阶段链接上来。
+
+
 * 编译阶段: 将文本文件hello.i翻译成**文本文件(还记得吗，全是用ASCII码表示的文件)**hello.s，它包含一个`汇编语言程序`。要解释汇编语言就是后话了。例如C编译器和Fortran编译器将hello.s产生的输出文件用的都是一样的汇编语言
-* 汇编阶段: 接下来，汇编器(as)将hello.s翻译成机械语言指令，把这些指令打包成为一种叫做`可重定位目标程序`的格式，并将结果保留在目标文件hello.o中。这时的hello.o文件是二进制文件
+&nbsp;
+汇编阶段就是.i文件编程汇编文件:
+ ![image-20201205145209270](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201205145210.png)
+注意源.i文件前面那一坨都被汇编用.开头的表示了，所以汇编这么简介。
+&nbsp;
+* 汇编阶段: 接下来，汇编器(as)将hello.s翻译成机械语言指令，把这些指令打包成为一种叫做`可重定位目标程序`的格式，并将结果保留在目标文件hello.o中。这时的hello.o文件是二进制文件。不能查看
 * 链接阶段: 这里就是相当于符号替换(用Java来说就是解析阶段的把引用符号替换成直接符号)好 说人话== ，比如printf函数，实际上它是C库中的一个函数，每个C编译器都提供。printf函数存在于一个名为printf.o的单独编译的目标文件中，链接器就负责把这里的printf.o并入到hello文件中。生成一个可执行目标文件。
 
 **emmm 在《计算机组成与设计》一书中第83页详细的讲了这个过程。大概有6页吧，太多就不赘述了**
