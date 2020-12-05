@@ -155,7 +155,7 @@ ls -l # 显示一个文件的属性以及文件所属的用户和组
 
 ## 1.3 更改文件属性
 
-* chgrp: 更改文件数组
+* chgrp: 更改文件属组
 
 ```bash
 chgrp [-R] 属组名 文件名
@@ -166,7 +166,7 @@ chgrp root hsperfdata_www
 
 
 
-* 更改文件属主，也可以同时更改文件数组
+* 更改文件属主，也可以同时更改文件属组
 
 ```bash
 chown [–R] 属主名 文件名
@@ -197,7 +197,7 @@ chmod 777 hsperfdata_www/
 chmod u=rwx,g=-,o=- hsperfdata_www/
 ```
 
-![image-20200910200819932](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201116205017.png)
+ ![image-20200910200819932](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201116205017.png)
 
 
 
