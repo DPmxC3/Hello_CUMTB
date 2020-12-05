@@ -192,7 +192,7 @@ public class test2 {
 
 这个字节码还算简单：
 
-![image-20201202202428526](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201202214949.png)
+ ![image-20201202202428526](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201202214949.png)
 
 可以看到主要就是24行开始到33行。看到注释都是调用的`human.say()`方法。理应是`human`方法啊。玄机就在这个`invokevirtual`指令上。让我们来看看这个`invokevirtual`到底干了什么事。
 
