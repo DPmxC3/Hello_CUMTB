@@ -13,11 +13,11 @@
 
 ### 魔数与Class文件版本
 
-class文件头四个字节被称为魔数。作用是确定这个文件是否为一个能被虚拟机接受的class文件。使用魔数而不是文件拓展名来识别是因为文件拓展名可以随意改动。同时魔数取得很有浪漫气息 '0xCAFEBABE'(咖啡宝贝)。
+class文件头四个字节被称为魔数。作用是确定这个文件是否为一个能被虚拟机接受的class文件。使用魔数而不是文件拓展名来识别是因为文件拓展名可以随意改动。同时魔数取得很有浪漫气息 `0xCAFEBABE`(咖啡宝贝)。
 
 然后第五六个字节为class文件得版本号。第七八个字节为主版本号。因为感觉不怎么重要所以不重点讨论。
 
-![魔数](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201031002719.png)
+ ![魔数](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201031002719.png)
 
 ### 常量池
 
@@ -25,17 +25,17 @@ class文件头四个字节被称为魔数。作用是确定这个文件是否为
 
 然后常量池中每一项常量都是一个表，最初常量表中共有11种结构各不相同的表结构数据，后来为了更好地支持动态语言调用，增加了4种动态语言相关的常量，为了支持Java模块化系统，又加入了CONSTANT_Module_info和CONSTANT_Package_info两个常量，截至到JDK13，常量表种分别有17种不同类型的常量
 
-![常量池](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201031003321.png)
+ ![常量池](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201031003321.png)
 
 然后之前说了，每个常量项都是一个表。所以存的数据就是根据常量项的表来存的。
 
 举例一个项：
 
-![常量](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201031004406.png)
+ ![常量](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201031004406.png)
 
 然后看看对应的第项字节码。完全符合吧~~
 
-![常量表结构](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201031003918.png)
+ ![常量表结构](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201031003918.png)
 
 
 
@@ -67,21 +67,21 @@ public class TestClass {
 
 ![访问标志](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201031005147.png)
 
-比如看看咋门字节码里面怎么写的：
+比如看看我们字节码里面怎么写的：
 
 ![字节码](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201031005227.png)
 
-这里写的是`0021`对应我们就可以得出。他的标志是: 0x0001 | 0x0020 = 0x0021(异或运算)，access_flag的标志就是ACC_SUPER 和 ACC_PUBLIC
+这里写的是`0021`对应我们就可以得出。他的标志是: 0x0001 | 0x0020 = 0x0021(异或运算)，access_flag的标志就是`ACC_SUPER` 和 `ACC_PUBLIC`
 
 
 
 ### 类索引，父类索引与接口索引集合
 
-类索引(this_class)和父类索引(super_class)都是一个u2类型的数据，而接口索引集合 (interfaces)是一组u2类型的数据的集合，Class文件中由这三项数据来确定该类型的继承关系。类索 引用于确定这个类的全限定名，父类索引用于确定这个类的父类的全限定名。由于Java语言不允许多 重继承，所以父类索引只有一个，除了java.lang.Object之外，所有的Java类都有父类，因此除了 java.lang.Object外，所有Java类的父类索引都不为0。接口索引集合就用来描述这个类实现了哪些接 口，这些被实现的接口将按implements关键字(如果这个Class文件表示的是一个接口，则应当是 extends关键字)后的接口顺序从左到右排列在接口索引集合中。
+类索引(this_class)和父类索引(super_class)都是一个u2类型的数据，而接口索引集合 (interfaces)是一组u2类型的数据的集合，Class文件中由这三项数据来确定该类型的继承关系。类索 引用于确定这个类的全限定名，父类索引用于确定这个类的父类的全限定名。由于Java语言不允许多 重继承，所以父类索引只有一个，除了`java.lang.Object`之外，所有的Java类都有父类，因此除了 `java.lang.Object`外，所有Java类的父类索引都不为0。接口索引集合就用来描述这个类实现了哪些接 口，这些被实现的接口将按implements关键字(如果这个Class文件表示的是一个接口，则应当是 extends关键字)后的接口顺序从左到右排列在接口索引集合中。
 
 
 
-类索引、父类索引和接口索引集合都按顺序排列在访问标志之后，类索引和父类索引用两个u2类 型的索引值表示，它们各自指向一个类型为CONSTANT_Class_info的类描述符常量，通过 CONSTANT_Class_info类型的常量中的索引值可以找到定义在CONSTANT_Utf8_info类型的常量中的 全限定名字符串。
+类索引、父类索引和接口索引集合都按顺序排列在访问标志之后，类索引和父类索引用两个u2类 型的索引值表示，它们各自指向一个类型为`CONSTANT_Class_info`的类描述符常量，通过 `CONSTANT_Class_info`类型的常量中的索引值可以找到定义在`CONSTANT_Utf8_info`类型的常量中的 全限定名字符串。
 
 **可以对照上面的字节码的图来看**
 
@@ -101,7 +101,7 @@ public class TestClass {
 
 
 
-**跟随access_flags标志的是两项索引值：name_index和descriptor_index。它们都是对常量池项的引 用，分别代表着字段的简单名称以及字段和方法的描述符。** 字段和方法描述和前面的全限定名就不赘述了。。请自行百度。。。
+**跟随access_flags标志的是两项索引值：name_index和descriptor_index。它们都是对常量池项的引用，分别代表着字段的简单名称以及字段和方法的描述符。** 字段和方法描述和前面的全限定名就不赘述了。。请自行百度。。。
 
 
 
@@ -154,7 +154,7 @@ Class文件存储 格式中对方法的描述与对字段的描述采用了几�
 
 
 
-**这就是编译器自己添加的方法！！！！有 <init> 和 <clint>**
+**这就是编译器自己添加的方法！！！！有 < init >() 和 < clint >()**
 
 > 哎 太难了 总感觉要写的简练点。但是真正就是有这么多。没办法
 
