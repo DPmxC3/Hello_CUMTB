@@ -12,7 +12,7 @@
 
 如果能在头脑中构建一副MySQL各组件之间如何协同工作的构架图，就会有助于深入理解MySQL服务器。
 
-![1](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201118014925)
+![image-20201205163417460](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201205163420.png)
 
 最上层的服务并不是MySQL所独有的，大多数基于网络的客户端/服务器的工具或者服务都有类似的架构。比如连接处理，授权认证，安全等等。
 
@@ -118,7 +118,7 @@ MySQL有两个层面的并发控制：服务器层与存储引擎层。并发控
 
 ​	**脏读:**
 
-![1](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201118014931)
+ ![image-20201205163534391](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201205163536.png)
 
 
 
@@ -128,7 +128,7 @@ MySQL有两个层面的并发控制：服务器层与存储引擎层。并发控
 
 ​	不可重复读：
 
-![2](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201118014936)
+![image-20201205163600881](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201205163604.png)
 
 
 
@@ -138,8 +138,7 @@ MySQL有两个层面的并发控制：服务器层与存储引擎层。并发控
 
 ​	幻读：
 
-![3](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201118014940)
-
+ ![image-20201205163640262](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201205163642.png)
 
 
 ### 死锁
