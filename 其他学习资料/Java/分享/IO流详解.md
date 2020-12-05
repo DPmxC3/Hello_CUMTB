@@ -2,7 +2,7 @@
 
 我们就讲讲一些实用的IO流，总共包括15个可以分为字节流和字符流。详细如下图：
 
-![img](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201201232717)
+  ![image-20201205155908899](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201205155911.png)
 
 emmm 还有一个就是`PrintStream`就是我们每次输出的时候是`System.out.println`。这个`System.out`就是`PrintStream`类型啊。然后`PrintStream`重载了`println`这个方法。
 
@@ -246,5 +246,5 @@ public class standerinput {
     public final static InputStream in = null;
 ```
 
-好了，这就是我认知里面的I/O流了~~
+好了，这就是基本的I/O流了~~
 
