@@ -243,8 +243,7 @@ Linux系统中使用以下命令来查看文件的内容：
 ```bash
 cat test.txt
 ```
-
-![image-20200910205230746](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201116205020.png)
+ ![image-20200910205230746](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201116205020.png)
 
 
 
