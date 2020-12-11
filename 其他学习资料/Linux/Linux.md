@@ -1,9 +1,6 @@
-![image-20200722110154863](https://i.loli.net/2020/07/22/mx2R3yTEflGUze8.png)
+# linux概述
 
-![image-20200722110911973](https://i.loli.net/2020/07/22/3TkhSEqnwoJIdxP.png)
-
-
-
+![image-20201211225831957](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211225833.png)
 
 
 ![image-20200724214808457](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201116204950.png)
@@ -16,8 +13,7 @@
 ls / # 列出所有目录
 ```
 
-![image-20200910182751035](https://i.loli.net/2020/09/10/WB5QNyfC2DrSphe.png)
-
+![image-20201211225737244](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211225738.png)
 - **/bin**：
   bin是Binary的缩写, 这个目录存放着最经常使用的命令。
 
@@ -218,7 +214,7 @@ chmod u=rwx,g=-,o=- hsperfdata_www/
 - rm: 移除文件或目录
 - mv: 移动文件与目录，或修改文件与目录的名称
 
-**别搞rm -rf / 昂 没意义**
+**别搞rm -rf / 没意义 `/`前面说过是根目录，这一删就是从根目录递归强制删除。你会看见一堆输出，然后你就可以跑路了**
 
 这个简单就不弄示例了。
 
