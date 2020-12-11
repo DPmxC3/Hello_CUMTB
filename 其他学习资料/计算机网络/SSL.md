@@ -41,19 +41,14 @@
 
 * Alice假设要发送一个整数m的比特(m < n)为了进行编码，Alice执行指数运算 m^e^,然后计算m^e^被n的余数。就是 
 
-$$
-c = m^e\, mod\, n
-$$
+c = m^e % n
 
 * 为了对收到这个密文报文c解密，Bob计算
 
-$$
-m = c^d \,mod\,   n
-$$
+m = c^d % n
 
 这个n和d就是bob的私钥。原理感兴趣的可以去看看《计算机网络自顶向下的方法》书中的第396页
-
-![image-20201211204538635](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211204541.png)
+ ![image-20201211204538635](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211204541.png)
 
 ## 散列函数
 
@@ -91,8 +86,7 @@ $$
 2） 然后Alice将MAC附加到报文m上，生成扩展报文（m, H（m+s））,并将该扩展 报文发送给Bob。 
 
 3） Bob接收到一个扩展报文（m，h）,由于知道s,计算出报文鉴别码H（m+s）。如 果H（m + s） = h,  Bob得到结论：一切正常。 
-
-![image-20201211214623674](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211214625.png)
+ ![image-20201211214623674](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211214625.png)
 
 ## 数字签名
 
@@ -104,11 +98,11 @@ Bob让他的初始长报文通过一个散列函数。然后他用自己的私�
 
 那对于`Bob`是这样的方式
 
-![image-20201211205228489](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211205232.png)
+ ![image-20201211205228489](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211205232.png)
 
 对于`Alice`是这样的
 
-![image-20201211205451187](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211205453.png)
+ ![image-20201211205451187](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211205453.png)
 
 
 
@@ -116,7 +110,7 @@ Bob让他的初始长报文通过一个散列函数。然后他用自己的私�
 
 数字签名的一个重要应用是**公钥认证**, 即证实一个公钥属于某个特定的实体。 我们回到问题，这确实可以保证报文在中途的安全性。但是好像不能准确的验证Bob真的是Bob，我们来看看这个图：
 
-![image-20201211210018919](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211210021.png)
+ ![image-20201211210018919](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211210021.png)
 
 那这对于服务器的话，这个是很可怕的！那我们怎么验证呢？这就要有一个权威机构。让服务器厂商都去哪里注册，然后我们通过用其公钥解密验证报文，然后查看其中内容，确实如此这样才行！
 
@@ -126,7 +120,7 @@ Bob让他的初始长报文通过一个散列函数。然后他用自己的私�
 
 2. 一旦CA验证了某个实体的身份，这个CA会生成一个将其身份和实体的公钥绑定起来的证书。这个证书包含这个公钥和公钥所有者全局唯一的身份标识信息 (例如，一个人的名字或一个IP地址)。由CA对这个证书进行数字签名
 
-   ![image-20201211210542462](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211210547.png)
+    ![image-20201211210542462](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211210547.png)
 
 
 
@@ -144,7 +138,7 @@ TCP的这种强化版本通常被称为安全套接字层
 
 SSL通过采用机密性、数据完整性、服务器鉴别和客户鉴别来强化TCP, 就可以解决 这些问题。 这也是我们在上文一直讨论的问题啊！！！
 
-![image-20201211211558184](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211211600.png)
+ ![image-20201211211558184](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211211600.png)
 
 ### 宏观描述
 
@@ -165,7 +159,7 @@ SSL通过采用机密性、数据完整性、服务器鉴别和客户鉴别来�
 
    Alice和Bob每人都从MS生成4个密钥。 这能够通过直接将该MS分为4个密钥来实现。在密钥导岀阶段结束时, Alice和Bob都有了 4个密钥。其中的两个加密密钥将用于加密数据；两个MAC密钥将用 于验证数据的完整性。 有利这四个东西就可以进行通话了
 
-   ![image-20201211213545304](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211213548.png)
+ ![image-20201211213545304](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211213548.png)
 
 ### 完整过程
 
