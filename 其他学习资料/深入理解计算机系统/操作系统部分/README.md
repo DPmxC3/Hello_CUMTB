@@ -2,4 +2,4 @@
 
 如果有能力贡献，十分欢迎。当然也可以提出一些issue，一起讨论 一起进步。
 
-可以参考b站哈工大的视频一起来学习 :point_right: [地址](https://www.bilibili.com/video/BV1d4411v7u7?p=23) :smirk:
+**可以参考b站哈工大的视频一起来学习 :point_right: [地址](https://www.bilibili.com/video/BV1d4411v7u7?p=23) :smirk:**
