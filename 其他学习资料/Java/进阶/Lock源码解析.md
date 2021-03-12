@@ -162,28 +162,45 @@ if (compareAndSetTail(pred, node)) {
 
 ## acquireQueued
 
+总的来说，一个线程获取锁失败了，被放入等待队列，acquireQueued会把放入队列中的线程不断去获取锁，直到获取成功或者不再需要获取（中断）。来看看源码：
 ```java
-final boolean acquireQueued(final Node node, int arg) {
-    boolean failed = true;
-    try {
-        boolean interrupted = false;
-        for (;;) {
-            final Node p = node.predecessor();
-            if (p == head && tryAcquire(arg)) {
-                setHead(node);
-                p.next = null; // help GC
-                failed = false;
-                return interrupted;
-            }
-            if (shouldParkAfterFailedAcquire(p, node) &&
-                parkAndCheckInterrupt())
-                interrupted = true;
-        }
-    } finally {
-        if (failed)
-            cancelAcquire(node);
-    }
+// java.util.concurrent.locks.AbstractQueuedSynchronizer
+
+private void cancelAcquire(Node node) {
+  // 将无效节点过滤
+	if (node == null)
+		return;
+  // 设置该节点不关联任何线程，也就是虚节点
+	node.thread = null;
+	Node pred = node.prev;
+  // 通过前驱节点，跳过取消状态的node
+	while (pred.waitStatus > 0)
+		node.prev = pred = pred.prev;
+  // 获取过滤后的前驱节点的后继节点
+	Node predNext = pred.next;
+  // 把当前node的状态设置为CANCELLED
+	node.waitStatus = Node.CANCELLED;
+  // 如果当前节点是尾节点，将从后往前的第一个非取消状态的节点设置为尾节点
+  // 更新失败的话，则进入else，如果更新成功，将tail的后继节点设置为null
+	if (node == tail && compareAndSetTail(node, pred)) {
+		compareAndSetNext(pred, predNext, null);
+	} else {
+		int ws;
+    // 如果当前节点不是head的后继节点，1:判断当前节点前驱节点的是否为SIGNAL，2:如果不是，则把前驱节点设置为SINGAL看是否成功
+    // 如果1和2中有一个为true，再判断当前节点的线程是否为null
+    // 如果上述条件都满足，把当前节点的前驱节点的后继指针指向当前节点的后继节点
+		if (pred != head && ((ws = pred.waitStatus) == Node.SIGNAL || (ws <= 0 && compareAndSetWaitStatus(pred, ws, Node.SIGNAL))) && pred.thread != null) {
+			Node next = node.next;
+			if (next != null && next.waitStatus <= 0)
+				compareAndSetNext(pred, predNext, next);
+		} else {
+      // 如果当前节点是head的后继节点，或者上述条件不满足，那就唤醒当前节点的后继节点
+			unparkSuccessor(node);
+		}
+		node.next = node; // help GC
+	}
 }
+
 private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
     int ws = pred.waitStatus;
     if (ws == Node.SIGNAL)
@@ -205,6 +222,8 @@ private final boolean parkAndCheckInterrupt() {
 ```
 
 这里就是队列中线程加锁/睡眠的核心逻辑，首先判断刚刚调用addWaiter方法添加到队列的节点是否是头节点，如果是则再次尝试加锁，这个刚刚分析过了，非公平锁在这里就会再次抢一次锁，抢锁成功则设置为head节点并返回打断标记；否则则和公平锁一样调用**shouldParkAfterFailedAcquire**判断是否应该调用park方法进入睡眠。
+
+
 
 
 
