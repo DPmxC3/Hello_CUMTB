@@ -48,7 +48,8 @@ c = m^e % n
 m = c^d % n
 
 这个n和d就是bob的私钥。原理感兴趣的可以去看看《计算机网络自顶向下的方法》书中的第396页
- ![image-20201211204538635](https://zouyishan.oss-cn-beijing.aliyuncs.com/images/20201211204541.png)
+![image](https://user-images.githubusercontent.com/57765968/111068666-b0f2d600-8504-11eb-93c9-5a6e63b0439d.png)
+
 
 ## 散列函数
 
