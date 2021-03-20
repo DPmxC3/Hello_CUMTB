@@ -73,8 +73,7 @@ WAL /redo log 提升性能的核心机制即尽量减少随机写磁盘的IO消�
 1、prepare阶段：redo持久化到磁盘（redo group commit），并将回滚段置为prepared状态，此时binlog不做操作。
 
 2、commit阶段：innodb释放锁，释放回滚段，设置提交状态，binlog持久化到磁盘，然后存储引擎层提交。
-
-
+这两个阶段的意义在于，在prepare阶段，redo是没有写入redo log中的，也就是说只有当bin log提交完了，redo log才会记录上为commit，原因可以模拟一下当在redo log 或者 bin log两个有一个没有成功提交后。可以发现两种方法只要有一个在crash之前没有备份好，数据库上的数据都没法和备份的数据相匹配。这就是为啥搞个两段式提交的原因！！！
 
 
 
